@@ -25,55 +25,11 @@ If you haven't done it already, download the following Github repo.  Then `cd` i
 
 ```
 $ cd ~
-$ git clone https://github.com/PawseySC/singularity-containers
+$ git clone https://github.com/qcif-training/singularity-containers.git
 $ cd singularity-containers
 $ export TUTO=$(pwd)
 ```
 {: .bash}
-
-
-> ## Want to save time later in the tutorial?
->
-> > ## Read this
-> > Open a second terminal in the machine where you're running the tutorial, then run the script `pull_big_images.sh` to start downloading a few images that you'll require later:
-> >
-> > ```
-> > $ cd $TUTO/demos
-> > $ nohup bash ./pull_big_images.sh &
-> > ```
-> > {: .bash}
-> >
-> > **In alternative**, if you are running at Pawsey, *e.g.* on Zeus, submit this other script with Slurm instead:
-> >
-> > ```
-> > $ cd $TUTO/demos
-> > $ sbatch ./sbatch_pull_big_images.sh
-> > ```
-> > {: .bash}
-> >
-> > This pull process will take at least one hour. Meanwhile, you'll be able to keep on going with this episode in your main terminal window.
-> >
-> {: .solution}
-{: .challenge}
-
-
-> ## Are you running on a shared HPC system?
->
-> If you're running this tutorial on a shared system (*e.g.* on Zeus or Magnus at Pawsey), you should use one of the compute nodes rather than the login node.  You can get this setup by using an interactive scheduler allocation, for instance on Zeus with Slurm:
->
-> ```
-> $ salloc -n 1 -t 4:00:00
-> ```
-> {: .bash}
->
-> ```
-> salloc: Granted job allocation 3453895
-> salloc: Waiting for resource configuration
-> salloc: Nodes z052 are ready for job
-> ```
-> {: .output}
-{: .callout}
-
 
 ### Singularity: a container engine for HPC
 
@@ -89,7 +45,7 @@ Singularity was designed from scratch as a container engine for HPC applications
 
 * *integration*, rather than *isolation*, by default: same user as host, same shell variables inherited by host, current directory bind mounted, communication ports available; as a result, launching a container requires a much simpler syntax than Docker;
 
-* interface with job schedulers, such as *Slurm* or *PBS*;
+* interface with job schedulers, such as *PBS* or *Slurm*;
 
 * ability to run MPI enabled containers using host libraries;
 
@@ -114,7 +70,7 @@ $ cd $TUTO/demos/singularity
 Running a command is done by means of `singularity exec`:
 
 ```
-$ singularity exec library://ubuntu:16.04 cat /etc/os-release
+$ singularity exec library://ubuntu:20.04 cat /etc/os-release
 ```
 {: .bash}
 
@@ -122,40 +78,64 @@ $ singularity exec library://ubuntu:16.04 cat /etc/os-release
 INFO:    Downloading library image
 
 NAME="Ubuntu"
-VERSION="16.04.5 LTS (Xenial Xerus)"
+VERSION="20.04 LTS (Focal Fossa)"
 ID=ubuntu
 ID_LIKE=debian
-PRETTY_NAME="Ubuntu 16.04.5 LTS"
-VERSION_ID="16.04"
-HOME_URL="http://www.ubuntu.com/"
-SUPPORT_URL="http://help.ubuntu.com/"
-BUG_REPORT_URL="http://bugs.launchpad.net/ubuntu/"
-VERSION_CODENAME=xenial
-UBUNTU_CODENAME=xenial
+PRETTY_NAME="Ubuntu 20.04 LTS"
+VERSION_ID="20.04"
+HOME_URL="https://www.ubuntu.com/"
+SUPPORT_URL="https://help.ubuntu.com/"
+BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
+PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
+VERSION_CODENAME=focal
+UBUNTU_CODENAME=focal
 ```
 {: .output}
 
 Here is what Singularity has just done:
 
-* downloaded a Ubuntu image from the Cloud Library (this would be skipped if the image had been downloaded previously);
+* downloaded a Ubuntu image from the Sylabs Cloud Library (this would be skipped if the image had been downloaded previously);
 * stored it into the default cache directory;
-* instantiated a container from that image;
+* launched a container from that image;
 * executed the command `cat /etc/os-release`.
 
-Container images have a **name** and a **tag**, in this case `ubuntu` and `16.04`.  The tag can be omitted, in which case Singularity will default to a tag named `latest`.
+Container images have a **name** and a **tag**, in this case `ubuntu` and `20.04`.  The tag can be omitted, in which case Singularity will default to a tag named `latest`.
 
 
-> ## Using the *latest* tag
->
-> The practice of using the `latest` tag can be handy for quick typing, but is dangerous when it comes to reproducibility of your workflow, as under the hood the *latest* tag could point to different images over time.
-{: .callout}
+## Using the *latest* tag
 
+The practice of using the `latest` tag can be handy for quick typing, but is dangerous when it comes to reproducibility of your workflow, as under the hood the *latest* tag could point to different images over time. If you don't specify a tag, `latest` is assumed:
 
-Here Singularity pulled the image from an online image registry, as represented in this example by the prefix `library://`, that corresponds to the [**Sylabs Cloud Library**](https://cloud.sylabs.io).  Images in there are organised as: `<user>/<project>/<name>:<tag>`.  
+```
+$ singularity exec library://ubuntu cat /etc/os-release
+```
+{: .bash}
+
+```
+NAME="Ubuntu"
+VERSION="21.04 (Hirsute Hippo)"
+ID=ubuntu
+ID_LIKE=debian
+PRETTY_NAME="Ubuntu 21.04"
+VERSION_ID="21.04"
+HOME_URL="https://www.ubuntu.com/"
+SUPPORT_URL="https://help.ubuntu.com/"
+BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
+PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
+VERSION_CODENAME=hirsute
+UBUNTU_CODENAME=hirsute
+```
+{: .output}
+
+The output would be the same if we specified library://ubuntu:latest
+
+## Singularity full URL
+
+Singularity pulled the image from an online image registry, as represented in this example by the prefix `library://`, that corresponds to the [**Sylabs Cloud Library**](https://cloud.sylabs.io).  Images in there are organised as: `<user>/<project>/<name>:<tag>`.  
 In the example above we didn't specify the **user**, `library`, and the **project**, `default`.  Why?  Because the specific case of `library/default/` can be omitted.  The full specification is used in the next example:
 
 ```
-$ singularity exec library://library/default/ubuntu:16.04 echo "Hello World"
+$ singularity exec library://library/default/ubuntu:20.04 echo "Hello World"
 ```
 {: .bash}
 
@@ -169,11 +149,12 @@ Here we are also experiencing image caching in action: the output has no more me
 
 ### Executing a command in a Docker container
 
-Interestingly, Singularity is able to download and run Docker images as well.  
+Singularity is able to download and run Docker images as well. It does this by downloading the docker image and converting to Singularity format.
+
 Let's try and download a Ubuntu container from the [**Docker Hub**](https://hub.docker.com), *i.e.* the main registry for Docker containers:
 
 ```
-$ singularity exec docker://ubuntu:16.04 cat /etc/os-release
+$ singularity exec docker://ubuntu:20.04 cat /etc/os-release
 ```
 {: .bash}
 
@@ -194,19 +175,18 @@ Copying config sha256:6cd71496ca4e0cb2f834ca21c9b2110b258e9cdf09be47b54172ebbcf8
 Writing manifest to image destination
 Storing signatures
 INFO:    Creating SIF file...
-INFO:    Build complete: /data/singularity/.singularity/cache/oci-tmp/a7b8b7b33e44b123d7f997bd4d3d0a59fafc63e203d17efedf09ff3f6f516152/ubuntu_16.04.sif
-
 NAME="Ubuntu"
-VERSION="16.04.6 LTS (Xenial Xerus)"
+VERSION="20.04.4 LTS (Focal Fossa)"
 ID=ubuntu
 ID_LIKE=debian
-PRETTY_NAME="Ubuntu 16.04.6 LTS"
-VERSION_ID="16.04"
-HOME_URL="http://www.ubuntu.com/"
-SUPPORT_URL="http://help.ubuntu.com/"
-BUG_REPORT_URL="http://bugs.launchpad.net/ubuntu/"
-VERSION_CODENAME=xenial
-UBUNTU_CODENAME=xenial
+PRETTY_NAME="Ubuntu 20.04.4 LTS"
+VERSION_ID="20.04"
+HOME_URL="https://www.ubuntu.com/"
+SUPPORT_URL="https://help.ubuntu.com/"
+BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
+PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
+VERSION_CODENAME=focal
+UBUNTU_CODENAME=focal
 ```
 {: .output}
 
@@ -234,12 +214,12 @@ Docker Hub organises images only by users (also called *repositories*), not by p
 > > ```
 > > [..]
 > > NAME="Ubuntu"
-> > VERSION="20.04 LTS (Focal Fossa)"
+> > VERSION="22.04 LTS (Jammy Jellyfish)"
 > > [..]
 > > ```
 > > {: .output}
 > >
-> > It's version 20.04.
+> > It's version 22.04.
 > {: .solution}
 {: .challenge}
 
@@ -251,7 +231,7 @@ Sometimes it can be useful to open a shell inside a container, rather than to ex
 Achieve this by using `singularity shell`:
 
 ```
-$ singularity shell docker://ubuntu:16.04
+$ singularity shell docker://ubuntu:20.04
 ```
 {: .bash}
 
@@ -265,14 +245,14 @@ Remember to type `exit`, or hit `Ctrl-D`, when you're done!
 
 ### Download and use images via SIF file names
 
-All examples so far have identified container images using their registry name specification, *e.g.* `docker://ubuntu:16.04` or similar.
+All examples so far have identified container images using their registry name specification, *e.g.* `docker://ubuntu:20.04` or similar.
 
 An alternative option to handle images is to download them to a known location, and then refer to their full directory path and file name.
 
 Let's use `singularity pull` to save the image to a specified path (output might differ depending on the Singularity version you use):
 
 ```
-$ singularity pull docker://ubuntu:16.04
+$ singularity pull docker://ubuntu:20.04
 ```
 {: .bash}
 
@@ -284,14 +264,14 @@ $ ls
 {: .bash}
 
 ```
-ubuntu_16.04.sif
+ubuntu_20.04.sif
 ```
 {: .output}
 
 Then you can use this image file by:
 
 ```
-$ singularity exec ./ubuntu_16.04.sif echo "Hello World"
+$ singularity exec ./ubuntu_20.04.sif echo "Hello World"
 ```
 {: .bash}
 
@@ -303,15 +283,15 @@ Hello World
 You can specify the storage location with the `--dir` flag:
 
 ```
-$ mkdir -p sif_lib
-$ singularity pull --dir ~/path/to/sif/lib docker://library/ubuntu:16.04
+$ mkdir -p $TUTO/sif_lib
+$ singularity pull --dir $TUTO/sif_lib docker://library/ubuntu:20.04
 ```
 {: .bash}
 
 Being able to specify download locations allows you to keep the local set of images organised and tidy, by making use of a directory tree.  It also allows for easy sharing of images within your team in a shared resource.  In general, you will need to specify the location of the image upon execution, *e.g.* by defining a dedicated variable:
 
 ```
-$ export image="~/path/to/sif/lib/ubuntu_16.04.sif"
+$ export image="$TUTO/sif_lib/ubuntu_20.04.sif"
 $ singularity exec $image echo "Hello Again"
 ```
 {: .bash}
@@ -389,7 +369,7 @@ Nvidia maintains the [Nvidia GPU Cloud (NGC)](https://ngc.nvidia.com), hosting a
 
 AMD has recently created [AMD Infinity Hub](https://www.amd.com/en/technologies/infinity-hub), to host containerised applications optimised for AMD GPUs.
 
-Right now, the Sylabs Cloud Library does not contain a large number of images.  Still, it can turn useful for storing container images requiring features that are specific to Singularity (we will see some in the next episodes).
+Right now, the Sylabs Cloud Library does not contain a large number of images.  Still, it can turn useful for storing container images requiring features that are specific to Singularity.
 
 
 > ## Pull and run a Python container ##
@@ -415,7 +395,7 @@ Right now, the Sylabs Cloud Library does not contain a large number of images.  
 > > {: .bash}
 > >
 > > ```
-> > Python 3.8.0
+> > Python 3.10.4
 > > ```
 > > {: .output}
 > {: .solution}
