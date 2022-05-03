@@ -32,22 +32,27 @@ $ qsub -I -S /bin/bash -l walltime=4:00:00 -l select=1:ncpus=2:mem=8gb
  
 This may take some time to run so we will come back to this later.
 
-### Containers vs Virtual Machines
+### Apps vs Containers
+
+To use software on a computer traditionally you were required to install the software. This means placing files on the filesystem, libraries in folders, configuration files in the correct place etc. Applications that have a setup program help by placing the files in the right place. This can lead to problems with conflicting files. What if two packages need to install the Widget library but App A needs Widget version 1 and App B needs Widget version 2? On a HPC, managing the installed software for hundreds or thousands of users becomes a real challenge.
+
+When people use packages like Python or R, they typically need a great deal of libraries to also be installed so their scripts can run.
 
 A container is an entity providing an isolated software environment (or filesystem) for an application and its dependencies.  
 
-If you have already used a Virtual Machine, or VM, you're actually already familiar with some of the concepts of a container. 
+<img src="{{ page.root }}/fig/container_diagram.png" alt="Apps vs Containers" width="619" height="331"/>
 
-<!-- ![Containers vs. VMs]({{ page.root }}/fig/container_vs_vm.png) -->
-<img src="{{ page.root }}/fig/container_vs_vm.png" alt="Containers vs. VMs" width="619" height="331"/>
+The key difference here is a container will have all the libraries and dependent apps needed to run the package. It does this by bundling the App, libraries and operation system into a single image.
 
-The key difference here is that VMs virtualise **hardware** while containers virtualise **operating systems**.  There are other differences (and benefits), in particular containers are:
+The benefits are:
 
-* lighter weight to run (less CPU and memory usage, faster start-up times)
+* Portable - the image does not need to be installed, it can "run" straight away
 
-* smaller in size (thus easier to transfer and share)
+* Self-contained - the image contains the whole stack needed to run the application
 
-* modular (possible to combine multiple containers that work together)
+* Isolated - as the image is self contained, it will not conflict with software in other containers or the host operating system
+
+* Modular - as each container has its defined apps, you can run different containers after each other in a pipeline
 
 
 ### Containers and your workflow
@@ -60,40 +65,33 @@ There are a number of reasons for using containers in your daily work:
 * Simplified software dependencies and management
 * Consistent testing environment
 
-A few examples of how containers are being used at Pawsey include:
+A few examples of how containers are being used include:
 
 * Bioinformatics workflows
 * Machine Learning 
 * Python apps in radio astronomy
 * RStudio & Jupyter Notebook sessions
-* Webservers
 * OpenFoam simulations
-* Cloud workflows (via Singularity or Docker)
 * HPC workflows (via Singularity)
-
-Here's an overview of what a typical workflow looks like:
-
-<!-- ![Container Workflow]({{ page.root }}/fig/container_lifecycle.png) -->
-<img src="{{ page.root }}/fig/container_lifecycle.png" alt="Container Workflow" width="716" height="298"/>
 
 ### Terminology
 
 An **image** is a file (or set of files) that contains the application and all its dependencies, libraries, run-time systems, etc. required to run.  You can copy images around, upload them, download them etc.
 
-A **container** is an instantiation of an image.  That is, it's a process in execution that got spawned out of an image.  You can run multiple containers from the same image, much like you might run the same application with different options or arguments.
+A **container** is an instantiation of an image.  That is, the image in a running state.  You can run multiple containers from the same image, much like you might run the same application with different options or arguments.
 
 In abstract, an image corresponds to a file, a container corresponds to a process.
 
-A **registry** is a server application where images are stored and can be accessed by users.  It can be public (*e.g.* *Docker Hub*) or private.
+A **registry** is a place where images are stored and can be accessed by users.  It can be public (*e.g.* *Docker Hub*) or private.
 
 To build an image we need a recipe.  A recipe file is called a **Definition File**, or **def file**, in the *Singularity* jargon and a **Dockerfile** in the *Docker* world.
 
 
 ### Container engines
 
-A number of tools are available to create, deploy and run containerised applications.  Some of these will be covered throughout this tutorial:
+A number of tools are available to create, deploy and run containerised applications.  We will only be using Singularity in this lesson:
 
-* **Docker**: the first engine to gain popularity, still widely used in the IT industry.  Not very suitable for HPC as it requires *root* privileges to run. We'll use it mostly to build container images.
+* **Docker**: the first engine to gain popularity, still widely used in the IT industry.  Not very suitable for HPC as it requires *root* privileges to run. Typically used on desktops
 
 * **Singularity**: a simple, powerful container engine for the HPC world.  The main focus of this workshop.
 
