@@ -34,23 +34,12 @@ $ ls /
 ```
 {: .bash}
 
-```
-bin  boot  dev  etc  external  home  home2  lib  lib64  lost+found  lustre  mnt  opt  pkg  proc  root  run  sbin  scratch  selinux  srv  sys  tmp  usr  var  work  work2
-```
-{: .output}
-
-
 Now let's look at the root directory when we're in the container
 
 ```
 $ singularity exec docker://ubuntu:20.04 ls /
 ```
 {: .bash}
-
-```
-bin  boot  dev  environment  etc  home  lib  lib32  lib64  libx32  media  mnt  opt  proc  root  run  sbin  singularity  srv  sys  tmp  usr  var
-```
-{: .output}
 
 
 > ## In which directory is the container running?
