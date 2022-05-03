@@ -16,19 +16,19 @@ Lets launch an Interactive job on your HPC.
 
 First, connect a terminal to your HPC:
 
-> ```
-> $ #QUT
-> $ ssh {username}@lyra.qut.edu.au
-> ```
-> {: .bash}
+```
+$ #QUT
+$ ssh {username}@lyra.qut.edu.au
+```
+{: .bash}
  
 Then launch the job:
  
-> ```
-> $ #QUT
-> $ qsub -I -S /bin/bash -l walltime=4:00:00 -l select=1:ncpus=2:mem=8gb
-> ```
-> {: .bash}
+```
+$ #QUT
+$ qsub -I -S /bin/bash -l walltime=4:00:00 -l select=1:ncpus=2:mem=8gb
+```
+{: .bash}
  
 This may take some time to run so we will come back to this later.
 
