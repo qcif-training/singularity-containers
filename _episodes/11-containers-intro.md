@@ -11,28 +11,27 @@ keypoints:
 - By using containers, you can better enforce reproducibility, portability and share-ability of your computational workflows.
 ---
 
-> ### Before We Start
->
-> Lets launch an Interactive job on your HPC.
->
-> First, connect a terminal to your HPC:
->
+### Before We Start
+Lets launch an Interactive job on your HPC.
+
+First, connect a terminal to your HPC:
+
 > ```
 > $ #QUT
 > $ ssh {username}@lyra.qut.edu.au
 > ```
 > {: .bash}
-> 
-> Then launch the job:
-> 
+ 
+Then launch the job:
+ 
 > ```
 > $ #QUT
 > $ qsub -I -S /bin/bash -l walltime=4:00:00 -l select=1:ncpus=2:mem=8gb
 > ```
 > {: .bash}
-> 
-> This may take some time to run so we will come back to this later.
-{: .prereq}
+ 
+This may take some time to run so we will come back to this later.
+
 ### Containers vs Virtual Machines
 
 A container is an entity providing an isolated software environment (or filesystem) for an application and its dependencies.  
