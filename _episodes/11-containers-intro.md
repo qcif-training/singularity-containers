@@ -16,12 +16,11 @@ Lets launch an Interactive job on your HPC.
 
 First, connect a terminal to your HPC:
 
-```
+```bash
 $ #QUT
 $ ssh {username}@lyra.qut.edu.au
 ```
-{: .bash}
- 
+
 Then launch the job:
  
 ```
