@@ -32,7 +32,7 @@ $ qsub -I -S /bin/bash -l walltime=4:00:00 -l select=1:ncpus=2:mem=8gb
 {: .bash}
 
 This may take some time to run so we will come back to this later.
-
+{: .prereq}
 ### Containers vs Virtual Machines
 
 A container is an entity providing an isolated software environment (or filesystem) for an application and its dependencies.  
