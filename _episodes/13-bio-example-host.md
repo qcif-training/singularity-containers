@@ -35,7 +35,7 @@ $ ls /
 {: .bash}
 
 ```
-bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  scratch  shared  srv  sys  tmp  usr  var
+bin  boot  dev  etc  external  home  home2  lib  lib64  lost+found  lustre  mnt  opt  pkg  proc  root  run  sbin  scratch  selinux  srv  sys  tmp  usr  var  work  work2
 ```
 {: .output}
 
@@ -43,12 +43,12 @@ bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  s
 Now let's look at the root directory when we're in the container
 
 ```
-$ singularity exec docker://ubuntu:18.04 ls /
+$ singularity exec docker://ubuntu:20.04 ls /
 ```
 {: .bash}
 
 ```
-bin  boot  data  dev  environment  etc	home  lib  lib64  media  mnt  opt  proc  root  run  sbin  singularity  srv  sys  tmp  usr  var
+bin  boot  dev  environment  etc  home  lib  lib32  lib64  libx32  media  mnt  opt  proc  root  run  sbin  singularity  srv  sys  tmp  usr  var
 ```
 {: .output}
 
@@ -72,7 +72,7 @@ bin  boot  data  dev  environment  etc	home  lib  lib64  media  mnt  opt  proc  
 > > ## Solution
 > >
 > > ```
-> > $ singularity exec docker://ubuntu:18.04 pwd
+> > $ singularity exec docker://ubuntu:20.04 pwd
 > > ```
 > > {: .bash}
 > >
@@ -93,7 +93,7 @@ bin  boot  data  dev  environment  etc	home  lib  lib64  media  mnt  opt  proc  
 > > ## Solution
 > >
 > > ```
-> > $ singularity exec docker://ubuntu:18.04 ls
+> > $ singularity exec docker://ubuntu:20.04 ls
 > > ```
 > > {: .bash}
 > >
@@ -114,7 +114,7 @@ bin  boot  data  dev  environment  etc	home  lib  lib64  media  mnt  opt  proc  
 > > ## Solution
 > >
 > > ```
-> > $ singularity exec docker://ubuntu:18.04 ls $TUTO/_episodes
+> > $ singularity exec docker://ubuntu:20.04 ls $TUTO/_episodes
 > > ```
 > > {: .bash}
 > >
@@ -143,7 +143,7 @@ bin  boot  data  dev  environment  etc	home  lib  lib64  media  mnt  opt  proc  
 > > ## Solution
 > > 
 > > ```
-> > $ singularity exec docker://ubuntu:18.04 touch /example
+> > $ singularity exec docker://ubuntu:20.04 touch /example
 > > ```
 > > {: .bash}
 > > 
@@ -157,7 +157,7 @@ bin  boot  data  dev  environment  etc	home  lib  lib64  media  mnt  opt  proc  
 {: .challenge}
 
 
-To summarise what we've learnt in the previous examples, we may say that a container ships an application and its dependencies by encapsulating them in an isolated, read-only filesystem.  In order for a container to access directories from the host filesystem (and write files), one needs to explicitly bind mount them.  The main exception here is the current work directory, which is bind mounted by default.
+To summarise what we've learnt in the previous examples, we may say that a container ships an application and its dependencies by encapsulating them in an isolated, read-only filesystem.  In order for a container to access directories from the host filesystem (and write files), one needs to explicitly bind mount them.  The main exception here is the current work directory or our home directory, which is bind mounted by default.
 
 
 ### Bind mounting host directories
@@ -242,7 +242,7 @@ By default, shell variables are inherited in the container from the host:
 
 ```
 $ export HELLO=world
-$ singularity exec docker://ubuntu:18.04 bash -c 'echo $HELLO'
+$ singularity exec docker://ubuntu:20.04 bash -c 'echo $HELLO'
 ```
 {: .bash}
 
@@ -256,7 +256,7 @@ There might be situations where you want to isolate the shell environment of the
 
 ```
 $ export HELLO=world
-$ singularity exec -C docker://ubuntu:18.04 bash -c 'echo $HELLO'
+$ singularity exec -C docker://ubuntu:20.04 bash -c 'echo $HELLO'
 ```
 {: .bash}
 
@@ -269,7 +269,7 @@ If you need to pass only specific variables to the container, that might or migh
 
 ```
 $ export SINGULARITYENV_CIAO=mondo
-$ singularity exec -C docker://ubuntu:18.04 bash -c 'echo $CIAO'
+$ singularity exec -C docker://ubuntu:20.04 bash -c 'echo $CIAO'
 ```
 {: .bash}
 
@@ -296,10 +296,11 @@ mondo
 We'll be running a BLAST (Basic Local Alignment Search Tool) example with a container from [BioContainers](https://biocontainers.pro).  BLAST is a tool bioinformaticians use to compare a sample genetic sequence to a database of known sequences; it's one of the most widely used bioinformatics packages.  
 This example is adapted from the [BioContainers documentation](http://biocontainers-edu.biocontainers.pro/en/latest/running_example.html).
 
-We're going to use an image for the most recent BLAST version from the `quay.io` registry, *i.e.* `quay.io/biocontainers/blast:2.9.0--pl526h3066fca_4`.  First, we'll pull the image.  This should take a few minutes (unless you had pulled the image in advance):
+We're going to use an image for the most recent BLAST version from the `quay.io` registry, *i.e.* `quay.io/biocontainers/blast:2.9.0--pl526he19e7b1_7`.  First, we'll pull the image.  This should take a few minutes (unless you had pulled the image in advance):
 
 ```
-$ singularity pull docker://quay.io/biocontainers/blast:2.9.0--pl526h3066fca_4
+$ cd $TUTO/data/blast
+$ singularity pull docker://quay.io/biocontainers/blast:2.9.0--pl526he19e7b1_7
 ```
 {: .bash}
 
@@ -387,7 +388,7 @@ $ gunzip zebrafish.1.protein.faa.gz
 > > ## Solution
 > >
 > > ```
-> > $ singularity exec ../blast/blast_2.9.0--pl526h3066fca_4.sif makeblastdb -in zebrafish.1.protein.faa -dbtype prot
+> > $ singularity exec ../blast/blast_2.9.0--pl526he19e7b1_7 makeblastdb -in zebrafish.1.protein.faa -dbtype prot
 > > ```
 > > {: .bash}
 > > ```
@@ -428,7 +429,7 @@ $ cd ../blast
 > > ## Solution
 > >
 > > ```
-> > $ singularity exec -B $TUTO/demos/blast_db blast_2.9.0--pl526h3066fca_4.sif blastp -query P04156.fasta -db $TUTO/demos/blast_db/zebrafish.1.protein.faa -out results.txt
+> > $ singularity exec -B $TUTO/demos/blast_db blast_2.9.0--pl526he19e7b1_7 blastp -query P04156.fasta -db $TUTO/demos/blast_db/zebrafish.1.protein.faa -out results.txt
 > > ```
 > > {: .bash}
 > {: .solution}
