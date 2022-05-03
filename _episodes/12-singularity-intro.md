@@ -1,7 +1,7 @@
 ---
 title: "Basics of Singularity"
-teaching: 20
-exercises: 20
+teaching: 30
+exercises: 30
 questions:
 objectives:
 - Download container images

@@ -1,7 +1,7 @@
 ---
 title: "Introduction to containers"
 teaching: 15
-exercises: 0
+exercises: 5
 questions:
 objectives:
 - Define the term "container"
