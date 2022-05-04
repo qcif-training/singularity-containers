@@ -9,19 +9,19 @@ root: .
 
 The main requirement for this workshop is a HPC account with your institution. Please ensure you have a HPC account. Check your institition's HPC connection instructions.
 
-QUT:
+* QUT: Visit HEAT and search for HPC account.
 
-UQ:
+* UQ:
 
-GU:
+* GU:
 
-CQU:
+* CQU:
 
-USQ:
+* USQ:
 
-USC:
+* USC:
 
-JCU:
+* JCU:
 
 ### Zoom
 

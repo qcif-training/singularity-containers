@@ -26,7 +26,9 @@ Then launch the job:
  
 ```
 $ #QUT
-$ qsub -I -S /bin/bash -l walltime=4:00:00 -l select=1:ncpus=2:mem=8gb
+$ qsub -I -S /bin/bash -l walltime=4:00:00 -l select=1:ncpus=2:mem=6gb
+$ #UQ - Tinaroo users, please ensure you know your group.
+$ qsub -I -A {GROUP} -l walltime=4:00:00 -l select=1:ncpus=2:mem=6gb
 ```
 {: .bash}
  

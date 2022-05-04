@@ -55,6 +55,11 @@ Singularity was designed from scratch as a container engine for HPC applications
 
 This tutorial assumes Singularity version 3.0 or higher.  Version **3.5.0 or higher** is recommended as it offers a smoother, more bug-free experience.
 
+### Loading Singularity on your HPC
+
+On some HPC systems, Singularity is automatically available, and some systems need a module load command.
+* QUT: no command needed
+* UQ: module load singularity/3.5.0
 
 ### Executing a simple command in a Singularity container
 
