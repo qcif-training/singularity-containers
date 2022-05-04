@@ -20,4 +20,10 @@ This lesson is an introduction to using Singularity on a HPC.  Episodes can be t
 * Container Basics
 * Using Containers for data analysis
 
+## Attribution
+
+This lesson was derived from the Pawsey Supercomputing Centre Singularity Containers Lesson
+
+https://pawseysc.github.io/singularity-containers/
+
 Like this Lesson?  **Star** it on [Github (button on top right)](https://github.com/qcif-training/singularity-containers)!
