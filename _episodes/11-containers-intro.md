@@ -42,7 +42,7 @@ When people use packages like Python or R, they typically need a great deal of l
 
 A container is an entity providing an isolated software environment (or filesystem) for an application and its dependencies.  
 
-<img src="{{ page.root }}/fig/container_diagram.png" alt="Apps vs Containers" width="619" height="331"/>
+<img src="{{ page.root }}/fig/container_diagram.png" alt="Apps vs Containers" width="708" height="331"/>
 
 The key difference here is a container will have all the libraries and dependent apps needed to run the package. It does this by bundling the App, libraries and operation system into a single image.
 
