@@ -98,32 +98,23 @@ $ singularity exec docker://ubuntu:20.04 ls /
 
 > ## How about other directories in the host?
 >
-> For instance, let us inspect `$TUTO/_episodes`.
+> For instance, let us inspect another folder on your HPC.
 >
 > > ## Solution
 > >
 > > ```
-> > $ singularity exec docker://ubuntu:20.04 ls $TUTO/_episodes
+> > $ singularity exec docker://ubuntu:20.04 ls {HPC Shared Folder}
 > > ```
 > > {: .bash}
 > >
 > > ```
-> > ls: cannot access '/home/ubuntu/singularity-containers/_episodes': No such file or directory
+> > ls: cannot access '{HPC Shared Folder}': No such file or directory
 > > ```
 > > {: .output}
 > >
 > > Host directories external to the current directory are not visible!  How can we fix this?  Read on...
 > {: .solution}
 {: .challenge}
-
-
-> ## What happens on Pawsey HPC systems?
-> 
-> This last example won't work as expected on Zeus, Magnus and other Pawsey HPC machines.  
-> This is due to site defaults that are meant to make users' life easier. In particular, `/group` and `/scratch` get bind mounted by default.  
-> If you want to experience this example on Pawsey HPC, you should first `unset SINGULARITY_BINDPATH`.
-{: .callout}
-
 
 > ## And by the way, can we write inside a container?
 > 
