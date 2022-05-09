@@ -159,7 +159,7 @@ There is also a short syntax, that just mounts the dir using the same name and p
 Let's use the latter syntax to mount `$TUTO` into the container and re-run `ls`.
 
 ```
-$ singularity exec -B $TUTO docker://ubuntu:18.04 ls $TUTO/_episodes
+$ singularity exec -B $TUTO docker://ubuntu:20.04 ls $TUTO/_episodes
 ```
 {: .bash}
 
@@ -175,8 +175,8 @@ $ singularity exec -B $TUTO docker://ubuntu:18.04 ls $TUTO/_episodes
 Also, we can write files in a host dir which has been bind mounted in the container:
 
 ```
-$ singularity exec -B $TUTO docker://ubuntu:18.04 touch $TUTO/_episodes/example
-$ singularity exec -B $TUTO docker://ubuntu:18.04 ls $TUTO/_episodes/example
+$ singularity exec -B $TUTO docker://ubuntu:20.04 touch $TUTO/_episodes/example
+$ singularity exec -B $TUTO docker://ubuntu:20.04 ls $TUTO/_episodes/example
 ```
 {: .bash}
 
@@ -270,7 +270,7 @@ mondo
 From Singularity 3.6.x on, there's an alternative way to define variables that are specific to the container, using the flag `--env`:
 
 ```
-$ singularity exec --env CIAO=mondo docker://ubuntu:18.04 bash -c 'echo $CIAO'
+$ singularity exec --env CIAO=mondo docker://ubuntu:20.04 bash -c 'echo $CIAO'
 ```
 {: .bash}
 
@@ -336,7 +336,7 @@ $ singularity pull docker://quay.io/biocontainers/blast:2.9.0--pl526he19e7b1_7
 > > ## Solution
 > >
 > > ```
-> > $ singularity exec blast_2.9.0--pl526h3066fca_4.sif blastp -help
+> > $ singularity exec blast_2.9.0--pl526he19e7b1_7.sif blastp -help
 > > ```
 > > {: .bash}
 > >
@@ -418,7 +418,7 @@ $ cd ../blast
 > > ## Solution
 > >
 > > ```
-> > $ singularity exec -B $TUTO/demos/blast_db blast_2.9.0--pl526he19e7b1_7 blastp -query P04156.fasta -db $TUTO/demos/blast_db/zebrafish.1.protein.faa -out results.txt
+> > $ singularity exec -B $TUTO/demos/blast_db blast_2.9.0--pl526he19e7b1_7.sif blastp -query P04156.fasta -db $TUTO/demos/blast_db/zebrafish.1.protein.faa -out results.txt
 > > ```
 > > {: .bash}
 > {: .solution}
