@@ -368,7 +368,7 @@ $ gunzip zebrafish.1.protein.faa.gz
 > > ## Solution
 > >
 > > ```
-> > $ singularity exec ../blast/blast_2.9.0--pl526he19e7b1_7 makeblastdb -in zebrafish.1.protein.faa -dbtype prot
+> > $ singularity exec ../blast/blast_2.9.0--pl526he19e7b1_7.sif makeblastdb -in zebrafish.1.protein.faa -dbtype prot
 > > ```
 > > {: .bash}
 > > ```
