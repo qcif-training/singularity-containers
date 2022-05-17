@@ -1,6 +1,6 @@
 ---
 title: "Introduction to containers"
-teaching: 15
+teaching: 20
 exercises: 5
 questions:
 objectives:
