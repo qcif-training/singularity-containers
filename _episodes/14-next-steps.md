@@ -1,7 +1,7 @@
 ---
 title: "Next Steps"
-teaching: 10
-exercises: 40
+teaching: 30
+exercises: 
 questions:
 objectives:
 - Use containers in HPC Jobs
