@@ -60,7 +60,17 @@ This tutorial assumes Singularity version 3.0 or higher.  Version **3.5.0 or hig
 On some HPC systems, Singularity is automatically available, and some systems need a module load command.
 * QUT: no command needed
 * UQ: module load singularity/3.5.0
+* JCQ: no command needed
 
+Please test you have Singularity available by running:
+```
+singularity --version
+```
+{: .bash}
+```
+-bash: singularity: command not found
+```
+{: .output}
 
 ### Our First Container
 
@@ -68,7 +78,7 @@ On some HPC systems, Singularity is automatically available, and some systems ne
 singularity run library://sylabsed/examples/lolcow
 ```
 {: .bash}
-This command downloads the image and runs the default command.
+Singularity downloads the image and runs the default command.
 ```
 INFO:    Downloading library image
 79.9MiB / 79.9MiB [=======================================================================================] 100 % 7.6 MiB/s 0s
@@ -83,7 +93,7 @@ INFO:    Downloading library image
                 ||     ||
 ```
 {: .output}
-The output of the command shows the container is first downloaded, then the default command has the cow saying something.
+The output of the command shows the container is first downloaded, then the default command has the cow proving a quote.
 
 ### Executing a simple command in a Singularity container
 
