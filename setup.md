@@ -9,19 +9,10 @@ root: .
 
 The main requirement for this workshop is a HPC account with your institution. Please ensure you have a HPC account. Check your institition's HPC connection instructions.
 
-* QUT: Visit HEAT and search for HPC account.
+Griffith University: Due to the configuration of your HPC, you should apply for account on Tinaroo 
+Wiener users: Due to the configuration of Wiener, you should apply for account on Tinaroo
 
-* UQ:
-
-* GU:
-
-* CQU:
-
-* USQ:
-
-* USC:
-
-* JCU:
+[Tinaroo Access](https://rcc.uq.edu.au/tinaroo)
 
 ### Zoom
 
