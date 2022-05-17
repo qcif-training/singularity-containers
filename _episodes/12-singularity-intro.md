@@ -61,6 +61,30 @@ On some HPC systems, Singularity is automatically available, and some systems ne
 * QUT: no command needed
 * UQ: module load singularity/3.5.0
 
+
+### Our First Container
+
+```
+singularity run library://sylabsed/examples/lolcow
+```
+{: .bash}
+This command downloads the image and runs the default command.
+```
+INFO:    Downloading library image
+79.9MiB / 79.9MiB [=======================================================================================] 100 % 7.6 MiB/s 0s
+ _____________________________________
+/ Q: What is purple and conquered the \
+\ world? A: Alexander the Grape.      /
+ -------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+```
+{: .output}
+The output of the command shows the container is first downloaded, then the default command has the cow saying something.
+
 ### Executing a simple command in a Singularity container
 
 For these first exercises, we're going to use a plain *Ubuntu* container image.  It's small and quick to download, and will allow use to get to know how containers work by using common Linux commands.  
