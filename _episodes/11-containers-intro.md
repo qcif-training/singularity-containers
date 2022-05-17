@@ -14,7 +14,8 @@ keypoints:
 ### Before We Start
 Lets launch an Interactive job on your HPC.
 
-First, connect a terminal to your HPC:
+First, connect a terminal to your HPC
+Eg, QUT:
 
 ```
 $ #QUT
@@ -31,7 +32,12 @@ $ #UQ - Tinaroo users, please ensure you know your group.
 $ qsub -I -A {GROUP} -l walltime=4:00:00 -l select=1:ncpus=2:mem=6gb
 ```
 {: .bash}
- 
+
+#### JCU People use Strudel
+JCU People, please use Strudel to connect to the HPC then open a terminal.
+
+See: [Graphical Connection to the HPC System](https://www.cqu.edu.au/eresearch/high-performance-computing/hpc-user-guides-and-faqs/graphical-connection-to-the-hpc-system)
+
 This may take some time to run so we will come back to this later.
 
 ### Apps vs Containers
