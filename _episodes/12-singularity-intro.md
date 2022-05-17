@@ -67,10 +67,22 @@ Please test you have Singularity available by running:
 singularity --version
 ```
 {: .bash}
+What you will see if Singularity is NOT available:
 ```
 -bash: singularity: command not found
 ```
 {: .output}
+> ## Finding Singularity Module
+> 
+> If you need to load Singularity via a module:
+> ```
+> # first find the versions available
+> module avail singularity
+> # then load
+> module load singularity/3.5.0
+> ```
+> {: .bash}
+{: .callout}
 
 ### Our First Container
 
