@@ -1,6 +1,7 @@
 ---
 title: "Discussion"
-questions: 30
+teaching: 30
+questions: 
 objectives:
 - Open discussion about using Containers in research
 ---
