@@ -33,8 +33,10 @@ $ qsub -I -A {GROUP} -l walltime=4:00:00 -l select=1:ncpus=2:mem=6gb
 ```
 {: .bash}
 
-#### JCU People use Strudel
-JCU People, please use Strudel to connect to the HPC then open a terminal.
+JCU People will use 'qris-jcu' as the GROUP name.
+
+#### CQU People use Strudel
+CQU People, please use Strudel to connect to the HPC then open a terminal.
 
 See: [Graphical Connection to the HPC System](https://www.cqu.edu.au/eresearch/high-performance-computing/hpc-user-guides-and-faqs/graphical-connection-to-the-hpc-system)
 
