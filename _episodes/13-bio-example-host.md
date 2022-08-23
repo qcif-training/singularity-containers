@@ -279,7 +279,7 @@ This example is adapted from the [BioContainers documentation](http://biocontain
 We're going to use an image for the most recent BLAST version from the `quay.io` registry, *i.e.* `quay.io/biocontainers/blast:2.9.0--pl526he19e7b1_7`.  First, we'll pull the image.  This should take a few minutes (unless you had pulled the image in advance):
 
 ```
-$ cd $TUTO/data/blast
+$ cd $TUTO/demos/blast
 $ singularity pull docker://quay.io/biocontainers/blast:2.9.0--pl526he19e7b1_7
 ```
 {: .bash}
@@ -320,29 +320,26 @@ $ singularity pull docker://quay.io/biocontainers/blast:2.9.0--pl526he19e7b1_7
 {: .challenge}
 
 
-> ## Run a test command
->
-> Let us run a simple command using the image we just pulled, for instance `blastp -help`, to verify that it actually works.
->
-> > ## Solution
-> >
-> > ```
-> > $ singularity exec blast_2.9.0--pl526he19e7b1_7.sif blastp -help
-> > ```
-> > {: .bash}
-> >
-> > ```
-> > USAGE
-> >   blastp [-h] [-help] [-import_search_strategy filename]
-> >
-> > [..]
-> >
-> >  -use_sw_tback
-> >    Compute locally optimal Smith-Waterman alignments?
-> > ```
-> > {: .output}
-> {: .solution}
-{: .challenge}
+### Run a test command
+
+Let us run a simple command using the image we just pulled, for instance `blastp -help`, to verify that it actually works.
+
+```
+$ singularity exec blast_2.9.0--pl526he19e7b1_7.sif blastp -help
+```
+{: .bash}
+
+```
+USAGE
+  blastp [-h] [-help] [-import_search_strategy filename]
+
+[..]
+
+ -use_sw_tback
+   Compute locally optimal Smith-Waterman alignments?
+```
+{: .output}
+
 
 
 Now, the demo directory `demos/blast` contains a human prion FASTA sequence, `P04156.fasta`, whereas another directory, `demos/blast_db`, contains a gzipped reference database to blast against, `zebrafish.1.protein.faa.gz`.  Let us `cd` to the latter directory and uncompress the database:
@@ -354,39 +351,47 @@ $ gunzip zebrafish.1.protein.faa.gz
 {: .bash}
 
 
-> ## Prepare the database
->
-> We then need to prepare the zebrafish database with `makeblastdb` for the search, using the following command through a container:
->
-> ```
-> $ makeblastdb -in zebrafish.1.protein.faa -dbtype prot
-> ```
-> {: .bash}
->
-> Try and run it via Singularity.
->
-> > ## Solution
-> >
-> > ```
-> > $ singularity exec ../blast/blast_2.9.0--pl526he19e7b1_7.sif makeblastdb -in zebrafish.1.protein.faa -dbtype prot
-> > ```
-> > {: .bash}
-> > ```
-> > Building a new DB, current time: 11/16/2019 19:14:43
-> > New DB name:   /home/ubuntu/singularity-containers/demos/blast_db/zebrafish.1.protein.faa
-> > New DB title:  zebrafish.1.protein.faa
-> > Sequence type: Protein
-> > Keep Linkouts: T
-> > Keep MBits: T
-> > Maximum file size: 1000000000B
-> > Adding sequences from FASTA; added 52951 sequences in 1.34541 seconds.
-> > ```
-> > {: .output}
-> {: .solution}
-{: .challenge}
+### Prepare the database
+
+We then need to prepare the zebrafish database with `makeblastdb` for the search. BLAST databases are created using the following command:
+
+```
+$ makeblastdb -in zebrafish.1.protein.faa -dbtype prot
+```
+{: .bash}
+
+To use the same command and execute it through our Singularity container, the command will look like:
+
+```
+$ singularity exec ../blast/blast_2.9.0--pl526he19e7b1_7.sif makeblastdb -in zebrafish.1.protein.faa -dbtype prot
+```
+{: .bash}
+
+```
+Building a new DB, current time: 11/16/2019 19:14:43
+New DB name:   /home/ubuntu/singularity-containers/demos/blast_db/zebrafish.1.protein.faa
+New DB title:  zebrafish.1.protein.faa
+Sequence type: Protein
+Keep Linkouts: T
+Keep MBits: T
+Maximum file size: 1000000000B
+Adding sequences from FASTA; added 52951 sequences in 1.34541 seconds.
+```
+{: .output}
 
 
-After the container has terminated, you should see several new files in the current directory (try `ls`).  
+After the container has terminated, you should see several new files in the current directory.
+```
+$ ls
+```
+{: .bash}
+
+```
+zebrafish.1.protein.faa      zebrafish.1.protein.faa.pin
+zebrafish.1.protein.faa.phr  zebrafish.1.protein.faa.psq
+```
+{: .output}
+
 Now let's proceed to the final alignment step using `blastp`. We need to cd into `demos/blast`:
 
 ```
@@ -397,14 +402,15 @@ $ cd ../blast
 
 > ## Run the alignment
 >
-> Adapt the following command to run into the container:
+> Adapt the following BLAST command to run through the container:
 >
 > ```
 > $ blastp -query P04156.fasta -db $TUTO/demos/blast_db/zebrafish.1.protein.faa -out results.txt
 > ```
 > {: .bash}
 >
-> Note how we put the database files in a separate directory on purpose, so that you will need to bind mount its path with Singularity.  Give it a go with building the syntax to run the `blastp` command.
+> Note how we put the database files in a separate directory on purpose, so that you will need to bind mount its path with Singularity.  
+Give it a go with building the syntax to run the `blastp` command.
 >
 > > ## Solution
 > >
