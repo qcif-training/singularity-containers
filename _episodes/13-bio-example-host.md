@@ -37,7 +37,7 @@ $ ls /
 Now let's look at the root directory when we're in the container
 
 ```
-$ singularity exec docker://ubuntu:20.04 ls /
+$ singularity exec library://ubuntu:20.04 ls /
 ```
 {: .bash}
 
@@ -61,7 +61,7 @@ $ singularity exec docker://ubuntu:20.04 ls /
 > > ## Solution
 > >
 > > ```
-> > $ singularity exec docker://ubuntu:20.04 pwd
+> > $ singularity exec library://ubuntu:20.04 pwd
 > > ```
 > > {: .bash}
 > >
@@ -82,7 +82,7 @@ $ singularity exec docker://ubuntu:20.04 ls /
 > > ## Solution
 > >
 > > ```
-> > $ singularity exec docker://ubuntu:20.04 ls
+> > $ singularity exec library://ubuntu:20.04 ls
 > > ```
 > > {: .bash}
 > >
@@ -103,7 +103,7 @@ $ singularity exec docker://ubuntu:20.04 ls /
 > > ## Solution
 > >
 > > ```
-> > $ singularity exec docker://ubuntu:20.04 ls {HPC Shared Folder}
+> > $ singularity exec library://ubuntu:20.04 ls {HPC Shared Folder}
 > > ```
 > > {: .bash}
 > >
@@ -123,7 +123,7 @@ $ singularity exec docker://ubuntu:20.04 ls /
 > > ## Solution
 > > 
 > > ```
-> > $ singularity exec docker://ubuntu:20.04 touch /example
+> > $ singularity exec library://ubuntu:20.04 touch /example
 > > ```
 > > {: .bash}
 > > 
@@ -150,7 +150,7 @@ There is also a short syntax, that just mounts the dir using the same name and p
 Let's use the latter syntax to mount `$TUTO` into the container and re-run `ls`.
 
 ```
-$ singularity exec -B $TUTO docker://ubuntu:20.04 ls $TUTO/_episodes
+$ singularity exec -B $TUTO library://ubuntu:20.04 ls $TUTO/_episodes
 ```
 {: .bash}
 
@@ -166,8 +166,8 @@ $ singularity exec -B $TUTO docker://ubuntu:20.04 ls $TUTO/_episodes
 Also, we can write files in a host dir which has been bind mounted in the container:
 
 ```
-$ singularity exec -B $TUTO docker://ubuntu:20.04 touch $TUTO/_episodes/example
-$ singularity exec -B $TUTO docker://ubuntu:20.04 ls $TUTO/_episodes/example
+$ singularity exec -B $TUTO library://ubuntu:20.04 touch $TUTO/_episodes/example
+$ singularity exec -B $TUTO library://ubuntu:20.04 ls $TUTO/_episodes/example
 ```
 {: .bash}
 
@@ -222,7 +222,7 @@ By default, shell variables are inherited in the container from the host:
 
 ```
 $ export HELLO=world
-$ singularity exec docker://ubuntu:20.04 bash -c 'echo $HELLO'
+$ singularity exec library://ubuntu:20.04 bash -c 'echo $HELLO'
 ```
 {: .bash}
 
@@ -236,7 +236,7 @@ There might be situations where you want to isolate the shell environment of the
 
 ```
 $ export HELLO=world
-$ singularity exec -C docker://ubuntu:20.04 bash -c 'echo $HELLO'
+$ singularity exec -C library://ubuntu:20.04 bash -c 'echo $HELLO'
 ```
 {: .bash}
 
@@ -249,7 +249,7 @@ If you need to pass only specific variables to the container, that might or migh
 
 ```
 $ export SINGULARITYENV_CIAO=mondo
-$ singularity exec -C docker://ubuntu:20.04 bash -c 'echo $CIAO'
+$ singularity exec -C library://ubuntu:20.04 bash -c 'echo $CIAO'
 ```
 {: .bash}
 
@@ -261,7 +261,7 @@ mondo
 From Singularity 3.6.x on, there's an alternative way to define variables that are specific to the container, using the flag `--env`:
 
 ```
-$ singularity exec --env CIAO=mondo docker://ubuntu:20.04 bash -c 'echo $CIAO'
+$ singularity exec --env CIAO=mondo library://ubuntu:20.04 bash -c 'echo $CIAO'
 ```
 {: .bash}
 
