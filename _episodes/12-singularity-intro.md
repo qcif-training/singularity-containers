@@ -31,6 +31,17 @@ $ export TUTO=$(pwd)
 ```
 {: .bash}
 
+The workshop files are also available as a zip archive if the Github repo download causes any problems. 
+
+```
+$ cd ~
+$ wget -O singularity-containers.gz https://cloudstor.aarnet.edu.au/plus/s/x5zB8boA7C74UiY/download
+$ tar -xf singularity-containers.gz
+$ cd singularity-containers
+$ export TUTO=$(pwd)
+```
+{: .bash}
+
 ### Singularity: a container engine for HPC
 
 As of June 2021 (**update!**), Singularity is now two distinct projects:
