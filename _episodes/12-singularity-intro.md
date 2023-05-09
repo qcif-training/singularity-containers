@@ -35,8 +35,8 @@ The workshop files are also available as a zip archive if the Github repo downlo
 
 ```
 $ cd ~
-$ wget -O singularity-containers.gz https://cloudstor.aarnet.edu.au/plus/s/x5zB8boA7C74UiY/download
-$ tar -xf singularity-containers.gz
+$ wget -O singularity-containers.tgz https://cloudstor.aarnet.edu.au/plus/s/x5zB8boA7C74UiY/download
+$ tar -xf singularity-containers.tgz
 $ cd singularity-containers
 $ export TUTO=$(pwd)
 ```
