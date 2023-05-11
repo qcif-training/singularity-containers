@@ -9,10 +9,9 @@ root: .
 
 The main requirement for this workshop is a HPC account with your institution. Please ensure you have a HPC account. Check your institition's HPC connection instructions.
 
-Griffith University: Due to the configuration of your HPC, you should apply for account on Tinaroo 
-Wiener users: Due to the configuration of Wiener, you should apply for account on Tinaroo
+Griffith University: Due to the configuration of your HPC, you should apply for account on Bunya.
 
-[Tinaroo Access](https://rcc.uq.edu.au/tinaroo)
+[Bunya](https://rcc.uq.edu.au/bunya)
 
 ### Zoom
 
