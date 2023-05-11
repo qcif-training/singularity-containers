@@ -27,7 +27,7 @@ $ cd $TUTO/demos
 
 What directories can we access from the container?
 
-First, let us assess what the content of the root directory `/` looks like from outside *vs* inside the container, to highlight the fact that a container runs on his own filesystem:
+First, let us assess what the content of the root directory `/` looks like from outside *vs* inside the container, to highlight the fact that a container runs in its own filesystem:
 
 ```
 $ ls /
@@ -155,11 +155,7 @@ $ singularity exec -B $TUTO library://ubuntu:20.04 ls $TUTO/_episodes
 {: .bash}
 
 ```
-11-containers-intro.md  22-build-docker.md      33-gpu-gromacs.md       45-docker.md
-12-singularity-intro.md 23-web-rstudio.md       41-workflow-engines.md  46-compose-web.md
-13-bio-example-host.md  24-ml-python.md         42-x11-gnuplot.md       47-other-tools.md
-14-build-intro.md       31-mpi-openfoam.md      43-wrappers.md
-21-build-deffile.md     32-writable-trinity.md  44-setup-singularity.md
+11-containers-intro.md  12-singularity-intro.md  13-bio-example-host.md  14-next-steps.md  15-discussion.md
 ```
 {: .output}
 
@@ -276,7 +272,7 @@ mondo
 We'll be running a BLAST (Basic Local Alignment Search Tool) example with a container from [BioContainers](https://biocontainers.pro).  BLAST is a tool bioinformaticians use to compare a sample genetic sequence to a database of known sequences; it's one of the most widely used bioinformatics packages.  
 This example is adapted from the [BioContainers documentation](http://biocontainers-edu.biocontainers.pro/en/latest/running_example.html).
 
-We're going to use an image for the most recent BLAST version from the `quay.io` registry, *i.e.* `quay.io/biocontainers/blast:2.9.0--pl526he19e7b1_7`.  First, we'll pull the image.  This should take a few minutes (unless you had pulled the image in advance):
+We're going to use an image for BLAST from the `quay.io` registry, *i.e.* `quay.io/biocontainers/blast:2.9.0--pl526he19e7b1_7`.  First, we'll pull the image.  This should take a few minutes (unless you had pulled the image in advance):
 
 ```
 $ cd $TUTO/demos/blast
