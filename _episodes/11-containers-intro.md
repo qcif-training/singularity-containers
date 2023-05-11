@@ -23,24 +23,14 @@ $ ssh {username}@lyra.qut.edu.au
 ```
 {: .bash}
 
-Then launch the job:
+Then launch an interactive job. Check the Google Doc for HPC examples 
  
-```
-$ #QUT
-$ qsub -I -S /bin/bash -l walltime=4:00:00 -l select=1:ncpus=2:mem=6gb
-$ #UQ - Tinaroo users, please ensure you know your group.
-$ qsub -I -A {GROUP} -l walltime=4:00:00 -l select=1:ncpus=2:mem=6gb
-```
-{: .bash}
-
-JCU People will use 'qris-jcu' as the GROUP name.
-
 #### CQU People use Strudel
 CQU People, please use Strudel to connect to the HPC then open a terminal.
 
 See: [Graphical Connection to the HPC System](https://www.cqu.edu.au/eresearch/high-performance-computing/hpc-user-guides-and-faqs/graphical-connection-to-the-hpc-system)
 
-This may take some time to run so we will come back to this later.
+This may take a while to start, so we will come back to this later.
 
 ### Apps vs Containers
 
@@ -104,6 +94,8 @@ A number of tools are available to create, deploy and run containerised applicat
 * **Docker**: the first engine to gain popularity, still widely used in the IT industry.  Not very suitable for HPC as it requires *root* privileges to run. Typically used on desktops
 
 * **Singularity**: a simple, powerful container engine for the HPC world.  The main focus of this workshop.
+
+* **Apptainer**: The Linux Foundation version of Singularity. 
 
 * **Shifter/Sarus**: a Docker-compatible container engine, suitable for HPC.  Can run containers, cannot build them.
 
