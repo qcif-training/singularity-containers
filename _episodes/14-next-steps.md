@@ -35,7 +35,7 @@ singularity exec -B $TUTO/demos/blast_db blast_2.9.0--pl526he19e7b1_7.sif blastp
 ```
 {: .bash}
 
-The above example shows running singularity as part of a job is just like using an intereactive job. If you need to load a module for singularity, include the command after the #PBS lines.
+The above example shows running singularity as part of a job is just like using an interactive job. If you need to load a module for singularity, include the command after the #PBS lines.
 
 ## Using Containers in Pipelines
 Many pipeline engines such as Nextflow and Snakemake can make use of containers using Docker, Singularity or other engines.
@@ -96,3 +96,32 @@ docker build -t lolcow:latest .
 ```
 {: .bash}
 Once built in Docker, it can be pushed to a repository, or converted to Singularity etc.
+
+An equivalent Sinularity DEF file:
+```
+BootStrap: library
+From: ubuntu:16.04
+
+%labels
+    Author eduardo@sylabs.io
+    Version v0.0.4
+    
+%post
+    apt-get -y update
+    apt-get -y install fortune cowsay lolcat
+
+%environment
+    export LC_ALL=C
+    export PATH=/usr/games:$PATH
+%help
+    singularity run library://sylabsed/actions/lolcow:latest
+
+%runscript
+    fortune | cowsay | lolcat
+```
+{: .bash}
+To build this singularity image:
+```
+singularity build lolcow.sif lolcow.def
+```
+{: .bash}
