@@ -48,6 +48,9 @@ As of June 2021 (**update!**), Singularity is now two distinct projects:
 * [Singularity](https://singularity.hpcng.org), maintained by [HPCng](https://hpcng.org) on their [GitHub](https://github.com/hpcng/singularity);
 * [SingularityCE](https://sylabs.io/singularity), maintained by [Sylabs](https://sylabs.io) on their [GitHub](https://github.com/sylabs/singularity).
 
+As of November 2021 (**update!**), Singularity is now Apptainer.
+* [Apptainer](https://apptainer.org/), is the [new name](https://apptainer.org/news/community-announcement-20211130/) for Singularity and is available on [GitHub](https://github.com/apptainer/apptainer)
+
 These two variants are equivalent up until version 3.7.4, released on May 2021.  This tutorial was developed with Singularity 3.5.x, therefore both variants can be used for the hands-on.
 
 Singularity was designed from scratch as a container engine for HPC applications, which is clearly reflected in some of its main features:
@@ -68,10 +71,10 @@ This tutorial assumes Singularity version 3.0 or higher.  Version **3.5.0 or hig
 
 ### Loading Singularity on your HPC
 
-On some HPC systems, Singularity is automatically available, and some systems need a module load command.
-* QUT: no command needed
-* UQ: module load singularity/3.5.0
-* JCQ: no command needed
+> ## Is Singularity automatically available?
+>
+> On some HPC systems, Singularity is automatically available, and some systems need a module load command.
+{: .callout}
 
 Please test you have Singularity available by running:
 ```
