@@ -98,6 +98,17 @@ What you will see if Singularity is NOT available:
 > {: .bash}
 {: .callout}
 
+> ## Extra Setup for Bunya Users
+>
+> Bunya users need to run additional commands to ensure Apptainer is configured:
+> ```
+> apptainer remote add --no-login SylabsCloud cloud.sycloud.io
+> apptainer remote use SylabsCloud
+> apptainer remote list
+> ```
+> {: .bash}
+{: .callout}
+
 ### Our First Container
 
 ```
